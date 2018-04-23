@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="brackEm">
+
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+    <title>BRACK-EM</title>
+
+    <link type=”image/x-icon” href=”/favicon.ico”>
+
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="css/app.css" />
+    <link rel="stylesheet" href="css/pacmanLoad.css" />
+    <link rel="stylesheet" href="css/bracket.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angularfire/dist/angularfire.js"></script>
+    <script src="bower_components/angular-smart-table/dist/smart-table.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+
+    <script src="app.js"></script>
+    <script src="services/data.service.js"></script>
+
+    <script src="components/bracket/bracket.component.js"></script>
+
+    <script src="controllers/bracket-list.controller.js"></script>
+    <script src="controllers/home.controller.js"></script>
+    <script src="controllers/main.controller.js"></script>
+    <script src="controllers/profile.controller.js"></script>
+    <script src="controllers/search.controller.js"></script>
+    <script src="controllers/sign-in.controller.js"></script>
+    <script src="controllers/sign-up.controller.js"></script>
+    <script src="controllers/create.controller.js"></script>
+
+    <script src="bower_components/firebase/firebase.js"></script>
+    <script src="bower_components/firebase/firebase-app.js"></script>
+    <script src="bower_components/firebase/firebase-auth.js"></script>
+    <script src="bower_components/firebase/firebase-database.js"></script>
+    <script src="bower_components/firebase/firebase-messaging.js"></script>
+    <script src="bower_components/angular-tel-input/src/angular-tel-input.js"></script>
+
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBGS0oJap3Tor6rFGoJDPoDza6CWctLZNI",
+            authDomain: "brack-em.firebaseapp.com",
+            databaseURL: "https://brack-em.firebaseio.com",
+            projectId: "brack-em",
+            storageBucket: "brack-em.appspot.com",
+            messagingSenderId: "706324537237"
+        };
+        firebase.initializeApp(config);
+
+    </script>
+</head>
+
+<body ng-controller="MainController" id="body">
+    <div ng-show="!doneLoading">
+        <div ng-include src="'partials/landing-page.partial.html'"></div>
+    </div>
+    <div ng-show="doneLoading">
+        <div ng-include src="'partials/nav-bar.partial.html'"></div>
+
+        <div ng-include src="'partials/alerts.partial.html'"></div>
+
+        <ng-view></ng-view>
+
+        <div ng-include src="'partials/footer.partial.html'"></div>
+    </div>
+</body>
+
+</html>

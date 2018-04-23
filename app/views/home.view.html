@@ -1,0 +1,10 @@
+<div ng-controller="HomeController">
+    <div class="well centered">
+        <h4>Feature Bracket: {{ bracket.name }}</h4>
+        <p>{{ bracket.description }}</p>
+        <p>Created by: {{ bracket.createdByDisplay }}</p>
+        <button ng-click="addBracketToList()" class="btn btn-primary">Fill it out now!</button>
+    </div>
+
+    <bracket bracket-id="{{ featuredId }}"></bracket>
+</div>

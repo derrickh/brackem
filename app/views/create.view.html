@@ -1,0 +1,56 @@
+<div controller="CreateController">
+    <form novalidate name="bracketForm">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="bracketName">Bracket Name</label>
+                    <input type="text" class="form-control" id="bracketName" placeholder="Bracket Name" ng-model="newBracket.name">
+                </div>
+                <div class="col-md-3">
+                    <label for="categoryList">Category</label>
+                    <select class="form-control" id="categoryList" ng-model="newBracket.category">
+                        <option id="1">Sports</option>
+                        <option id="2">Movies</option>
+                        <option id="3">Celebrities</option>
+                        <option id="4">Animals</option>
+                        <option id="5">Music</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="format"># of teams</label>
+                    <select class="form-control" id="format" ng-model="newBracket.format">
+                        <option>4</option>
+                        <option>8</option>
+                        <option>16</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="bracketDescription">Description</label>
+                    <textarea class="form-control" id="bracketDescription" rows="3" ng-model="newBracket.description" style="resize:none"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <label for="">Enter in one value per line, if not random seeded, put them in the order you want the seeds</label>
+            </div>
+            <div class="row text-left">
+                <label><input type="checkbox" id="randomSeeding" ng-model="newBracket.randomSeeding"> Random seeding?</label>
+            </div>
+
+            <div class="col-xs-1 col-sm-1" style="text-align:right" ng-show="!newBracket.randomSeeding">
+                <div ng-repeat="i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]" style="padding-top:.5px">{{$index+1}}</div>
+            </div>
+            <div class="col-xs-8 col-sm-6">
+                <textarea class="form-control" id="teamList" rows="16" ng-model="newBracket.teamList" style="resize:none"></textarea>
+            </div>
+        </div>
+        <div class="well text-center">
+            <input type="submit" ng-click="create()" value="Create Bracket" />
+        </div>
+    </form>
+</div>
+
+
+
+<!-- <div class="clearfix visible-xs-block"></div> -->
