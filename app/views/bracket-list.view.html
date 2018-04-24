@@ -32,6 +32,7 @@
                     <td ng-click="openBracket(bracket.id)" class="hidden-xs">{{bracket.createdByDisplay}}</td>
                     <td ng-click="openBracket(bracket.id)" class="hidden-xs">{{bracket.createdOn | date:'shortDate'}}</td>
                     <td>
+                        <!--<a ng-click="setAsFeatured(bracket)">Featured</a>-->
                         <a ng-click="shareBracket(bracket)"><i class="glyphicon glyphicon-share" title="Share"></i></a>
                         <a ng-click="printBracket(bracket)"><i class="glyphicon glyphicon-print" title="Print"></i></a>
                         <a confirmed-click="deleteBracket(bracket)" ng-confirm-click="Are you sure you want to delete this bracket? Cannot be undone"><i class="glyphicon glyphicon-trash" title="Delete"></i></a>

@@ -2,6 +2,20 @@
 
 angular.module('brackEm')
     .controller('BracketListController', ["$scope", "$filter", "$location", "$firebase", "DataService", function ($scope, $filter, $location, $firebase, DataService) {
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                DataService.getBracketList()
+                    .then(function (response) {
+                        $scope.bracketList = response;
+                    })
+                    .catch(function (err) {
+                        $scope.showError(err);
+                    })
+            } else {
+                $scope.bracketList = [];
+            }
+        });
+
         $scope.openBracket = function (bracketId) {
             if (!$scope.actionClicked) {
                 $location.path("/bracket/" + bracketId);
@@ -29,11 +43,7 @@ angular.module('brackEm')
             });
         }
 
-        DataService.getBracketList()
-            .then(function (response) {
-                $scope.bracketList = response;
-            })
-            .catch(function (err) {
-                throw new Error(err);
-            })
+        $scope.setAsFeatured = function (bracket) {
+            DataService.setFeaturedBracket(bracket);
+        }
     }]);

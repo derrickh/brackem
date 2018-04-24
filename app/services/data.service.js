@@ -17,8 +17,8 @@ angular.module('brackEm')
 
         dataService.getBracket = function (bracketId) {
             var deferred = $q.defer();
-            var brackets = firebase.database().ref('brackets/' + bracketId);
-            var obj = $firebaseObject(brackets);
+            var bracket = firebase.database().ref('brackets/' + bracketId);
+            var obj = $firebaseObject(bracket);
             obj.$loaded().then(function () {
                 deferred.resolve(obj);
             });
@@ -34,6 +34,26 @@ angular.module('brackEm')
             bracket.id = newPostKey;
             var updates = {};
             updates['/brackets/' + newPostKey] = bracket;
+            return firebase.database().ref().update(updates);
+        }
+
+        dataService.getFeaturedBracket = function () {
+            var deferred = $q.defer();
+            var bracket = firebase.database().ref('featured/bracket');
+            var obj = $firebaseObject(bracket);
+            obj.$loaded().then(function () {
+                deferred.resolve(obj);
+            });
+            return deferred.promise;
+        }
+
+        dataService.setFeaturedBracket = function (bracket) {
+            delete bracket.$id;
+            delete bracket.$priority;
+            delete bracket.$$hashKey;
+
+            var updates = {};
+            updates['/featured/bracket'] = bracket;
             return firebase.database().ref().update(updates);
         }
 

@@ -6,22 +6,24 @@ component('bracket', {
     templateUrl: 'components/bracket/bracket.template.html',
     controller: function BracketCompController($scope, $routeParams, DataService) {
         var $ctrl = this;
-        $scope.readOnly = true;
         $ctrl.$onInit = function () {
-            if ($routeParams.bracketId) {
-                $scope.readOnly = false;
+            $scope.readOnly = $ctrl.readOnly;
+
+            if (!$ctrl.data) {
+                DataService.getBracket($ctrl.bracketId)
+                    .then(function (response) {
+                        if ($scope.readOnly) {
+                            $scope.bracket = response;
+                        } else {
+                            response.$bindTo($scope, "bracket");
+                        }
+                    })
+                    .catch(function (err) {
+                        throw new Error(err);
+                    })
+            } else {
+                $scope.bracket = $ctrl.data;
             }
-            DataService.getBracket($ctrl.bracketId)
-                .then(function (response) {
-                    if ($scope.readOnly) {
-                        $scope.bracket = response;
-                    } else {
-                        response.$bindTo($scope, "bracket");
-                    }
-                })
-                .catch(function (err) {
-                    throw new Error(err);
-                })
         }
 
         $scope.isRoundVisible = function (roundNum) {
@@ -76,13 +78,26 @@ component('bracket', {
         }
 
         $scope.setChamp = function (team) {
-            if ($scope.readOnly) {
+            if ($ctrl.readOnly) {
                 return;
             }
             alert('you have ' + team.name + ' winning it all!');
         }
+
+        $scope.tab = 1;
+
+        $scope.setTab = function (newTab) {
+            console.log('in in set');
+            $scope.tab = newTab;
+        };
+
+        $scope.isSet = function (tabNum) {
+            return $scope.tab === tabNum;
+        };
     },
     bindings: {
-        bracketId: '@'
+        data: '=',
+        bracketId: '@',
+        readOnly: '<'
     }
 });

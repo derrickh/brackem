@@ -99,3 +99,20 @@ h1 {
 #myProfile.a:hover {
     opacity: 0.7;
 }
+
+.nav-pills > li.active > a,
+.btn-primary {
+    background-color: #6C6C6C !important;
+    border-color: #6C6C6C !important;
+    border-radius: 25px;
+}
+
+.mobileMatchup {
+    background-color: #333;
+    color: white;
+    padding: 5px;
+    margin-bottom: 10px;
+    height: 60px;
+    font-weight: bold;
+    font-size: 1.2em;
+}

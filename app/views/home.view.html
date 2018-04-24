@@ -4,7 +4,8 @@
         <p>{{ bracket.description }}</p>
         <p>Created by: {{ bracket.createdByDisplay }}</p>
         <button ng-click="addBracketToList()" class="btn btn-primary">Fill it out now!</button>
+        <div ng-if="bracket.id">
+            <bracket read-only="true" data="getCurrentBracket()"></bracket>
+        </div>
     </div>
-
-    <bracket bracket-id="{{ featuredId }}"></bracket>
 </div>
